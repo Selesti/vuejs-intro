@@ -22,4 +22,4 @@ These are basic accompanying documents to help explain various features of vuejs
 * Events
   * Communication between components
   * Event buses
-  * Props/Attributes
+  * Props/Attributes & modifiers

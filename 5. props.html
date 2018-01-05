@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Inline Templates</title>
+    <title>Props</title>
     <script type="text/javascript" src="https://vuejs.org/js/vue.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 </head>
@@ -53,7 +53,9 @@
             <button class="btn btn-primary" @click="newFamo">Modify Parent</button>
         </div>
 
-        <mad-props name="" :id="" settings="{'enabled': true}"></mad-props>
+        <h1 class="mt-5">Prop validation</h1>
+
+        <mad-props :id="2" :settings="{'enabled': true}"></mad-props>
 
 
     </div>
@@ -79,7 +81,7 @@
 
             name: {
                 type: String,
-                required: true
+                default: 'No name'
             },
 
             id: {
@@ -89,14 +91,15 @@
 
             settings: {
                 type: Object,
-                default() {
-                    return {
-                        enabled: false
-                    }
-                }
+                required: true,
             }
 
-        }
+        },
+        template: `<div class="my-4 p-2 card">
+            Name: {{ name }}<br>
+            ID: {{ id }}<br>
+            Enabled: {{ settings.enabled }} (default is false)
+        </div>`
     })
 
     new Vue({

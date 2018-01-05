@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inline Templates</title>
+    <script type="text/javascript" src="https://vuejs.org/js/vue.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+</head>
+<body>
+
+    <div id="my-app" class="">
+
+        <div class="container pt-4">
+
+            <h1>Component Template X</h1>
+
+            <customisable inline-template>
+                <div class="card my-4"> <!-- This is the root element -->
+                    <ul class="list-group">
+                        <li class="list-group-item" v-for="tip in tips">{{ tip }}</li>
+                    </ul>
+                </div>
+            </customisable>
+
+            <h1>Component Template Y</h1>
+
+            <customisable inline-template>
+                <div class="my-4"> <!-- This is the root element -->
+                    <div class="card p-2 mb-2" v-for="(tip, index) in tips">
+                        <div clas="card-body">
+                            <h3 class="card-title">Tip #{{ index + 1 }}</h3>
+                            <p class="card-text">{{ tip }}</p>
+                        </div>
+                    </div>
+                </div>
+            </customisable>
+
+
+        </div>
+
+    </div>
+
+<script type="text/javascript">
+
+    Vue.component('customisable', {
+        data() {
+            return {
+                tips: [
+                    "Sometimes you don't want to render the template via JS, e.g if you need to use PHP inside it, or for SEO reasons",
+                    'So tag your component with the "inline-template" attribute',
+                    'You must then set a root component within it, normally a div is fine',
+                    'You might even need a whole bunch of different markup, but the same functionality'
+                ]
+            }
+        }
+    })
+
+    new Vue({
+        el: '#my-app'
+    })
+
+</script>
+
+</body>
+</html>

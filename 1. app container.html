@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>App Container</title>
+    <script type="text/javascript" src="https://vuejs.org/js/vue.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <style type="text/css">body { color: #fff; }</style>
+</head>
+<body class="d-flex flex-row" style="color: white;">
+
+    <div id="my-app">
+        <!-- Renderable Area! -->
+    </div>
+
+    <div id="other-app" >
+        <!-- Renderable Area! -->
+    </div>
+
+<script type="text/javascript">
+
+    new Vue({
+        el: '#my-app',
+        template: `<div class="p-2" style="background: #ff9800;">I'm a very special app.</div>`
+    })
+
+    new Vue({
+        el: '#other-app',
+        template: `<div class="p-2" style="background: #8bc34c;">But I'm also special app.</div>`
+    })
+
+</script>
+
+</body>
+</html>

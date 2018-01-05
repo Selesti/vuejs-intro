@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Components</title>
+    <script type="text/javascript" src="https://vuejs.org/js/vue.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <style type="text/css">body { color: #fff; }</style>
+</head>
+<body>
+
+    <div id="my-app" class="d-flex flex-row">
+
+        <named-component></named-component>
+
+    </div>
+
+<script type="text/javascript">
+
+    Vue.component('named-component', {
+        template: `<div class="p-2" style="background: #8d299f;">I'm a named component.</div>`
+    })
+
+    new Vue({
+        el: '#my-app'
+    })
+
+</script>
+
+</body>
+</html>

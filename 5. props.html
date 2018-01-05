@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Inline Templates</title>
+    <script type="text/javascript" src="https://vuejs.org/js/vue.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+</head>
+<body>
+
+    <div id="my-app" class="container pt-4">
+
+        <h1>Props</h1>
+
+        <props api-endpoint="/contact-us">
+
+        </props>
+
+        <h1 class="mt-5">Parsed props vs Unparsed props</h1>
+
+        <div>
+            <parsing inline-template
+                user-name="Owen"
+                unparsed-json="{'username': 'owen'}"
+                :user-id="1"
+                :parsed-json="{'username': 'owen'}"
+            >
+                <ul class="mt-4">
+                    <li><strong>Unparsed String:</strong> {{ userName }} - {{ typeof userName }}</li>
+                    <li><strong>Parsed String:</strong> {{ userId }} - {{ typeof userId }}</li>
+                    <li><strong>Unparsed String:</strong> {{ unparsedJson }} - {{ typeof unparsedJson }}</li>
+                    <li><strong>Parsed String:</strong> {{ parsedJson }} - {{ typeof parsedJson }}</li>
+                </ul>
+            </parsing>
+        </div>
+
+        <h1 class="mt-5">Prop inheritance (children &amp; Parents)</h1>
+
+        <family family="famo" :parsed-family="famo" inline-template>
+            <div class="mt-4">
+                <code>$this.family = {{ family }};</code><br>
+                <code>$this.parsedFamily = {{ parsedFamily }};</code>
+
+                <div class="mt-4">
+                    <button class="btn btn-danger" @click="pushBaby">I'm inside the child!</button>
+                </div>
+
+            </div>
+        </family>
+
+
+        <div class="mt-4 alert-success p-2">
+            Im (g)root.<br><br>
+            <button class="btn btn-primary" @click="newFamo">Modify Parent</button>
+        </div>
+
+        <mad-props name="" :id="" settings="{'enabled': true}"></mad-props>
+
+
+    </div>
+
+<script type="text/javascript">
+
+    Vue.component('props', {
+        props: ['apiEndpoint'],
+        template: `<div>{{ apiEndpoint }}</div>`
+    })
+
+    Vue.component('parsing', {
+        props: ['userName', 'userId', 'unparsedJson', 'parsedJson']
+    })
+
+    Vue.component('family', {
+        props: ['family', 'parsedFamily'],
+        methods: { pushBaby() { this.parsedFamily.push('Baby'); } }
+    })
+
+    Vue.component('mad-props', {
+        props: {
+
+            name: {
+                type: String,
+                required: true
+            },
+
+            id: {
+                type: Number,
+                required: true
+            },
+
+            settings: {
+                type: Object,
+                default() {
+                    return {
+                        enabled: false
+                    }
+                }
+            }
+
+        }
+    })
+
+    new Vue({
+        el: '#my-app',
+        data: {
+            famo: ['Dad', 'Mum', 'Aunt Jan', 'Terry']
+        },
+        methods: { newFamo() { this.famo.push('Dog'); } }
+    })
+
+</script>
+
+</body>
+</html>

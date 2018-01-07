@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lifecycle</title>
+    <script type="text/javascript" src="https://vuejs.org/js/vue.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+</head>
+<body>
+
+    <div id="my-app" class="container pt-4">
+
+        <h1>In a nut shell</h1>
+
+        <ol class="mt-4">
+            <li>All your components are loaded into memory</li>
+            <li>Vue loads and takes an in-memory snapshot of the DOM and converts it into a virtual dom (not shadow dom)</li>
+            <li>Starts up your application and is ready</li>
+        </ol>
+
+        <h2>Things to remember</h2>
+
+        <ul class="mt-4">
+            <li>Always import/require your components BEFORE you init vue</li>
+            <li>As Vue takes a copy of the DOM and replaces it - you must load certain elements AFTER vue has loaded, e.g google+ images otherwise you'll get race condition issues</li>
+        </ul>
+
+        <h2>Most common life-cycle scenario</h2>
+
+        <ul class="mt-4">
+            <li>JS loads</li>
+            <li>Vue "mounted" - once vue is booted, useful for including other js like google scripts</li>
+            <li>Components "mounted" - once your component is ready, useful for ajax calls for fetching component data</li>
+        </ul>
+
+        <h2>Full lifecycle</h2>
+
+        <img src="https://vuejs.org/images/lifecycle.png" style="width: 100%; max-width: 400px; height: auto">
+
+
+    </div>
+
+<script type="text/javascript">
+
+    Vue.component('props', {
+        props: ['apiEndpoint'],
+        template: `<div>{{ apiEndpoint }}</div>`
+    })
+
+    Vue.component('parsing', {
+        props: ['userName', 'userId', 'unparsedJson', 'parsedJson']
+    })
+
+    Vue.component('family', {
+        props: ['family', 'parsedFamily'],
+        methods: { pushBaby() { this.parsedFamily.push('Baby'); } }
+    })
+
+    Vue.component('mad-props', {
+        props: {
+
+            name: {
+                type: String,
+                default: 'No name'
+            },
+
+            id: {
+                type: Number,
+                required: true
+            },
+
+            settings: {
+                type: Object,
+                required: true,
+            }
+
+        },
+        template: `<div class="my-4 p-2 card">
+            Name: {{ name }}<br>
+            ID: {{ id }}<br>
+            Enabled: {{ settings.enabled }} (default is false)
+        </div>`
+    })
+
+    new Vue({
+        el: '#my-app',
+        data: {
+            famo: ['Dad', 'Mum', 'Aunt Jan', 'Terry']
+        },
+        methods: { newFamo() { this.famo.push('Dog'); } }
+    })
+
+</script>
+
+</body>
+</html>

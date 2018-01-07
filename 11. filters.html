@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Filters</title>
+    <script type="text/javascript" src="https://vuejs.org/js/vue.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+</head>
+<body>
+
+    <div id="my-app" class="container pt-4">
+
+        <filters inline-template>
+
+            <div class="card p-4">
+
+                <div class="alert alert-danger">
+                    Filters <strong>not</strong> as in searches.
+                </div>
+
+                <h2 class="mt-4 mb-4">They let you manipulate data</h2>
+
+                <ul>
+                    <li v-for="name in names">From {{ name }} into -> {{ name | backwards }}</li>
+                </ul>
+
+                <div class="alert alert-info mt-4">
+                    If you want to "filter" data - as in an array of results, then you use "computed properties" to return the results, such as only showing the boys.
+                </div>
+
+                <ul>
+                    <li v-for="name in boys">{{ name }}</li>
+                </ul>
+
+            </div>
+
+        </filters>
+
+    </div>
+
+<script type="text/javascript">
+
+    Vue.component('filters', {
+
+        data() {
+            return {
+                names: [
+                    'Garry',
+                    'John',
+                    'Selma',
+                    'Helen',
+                ]
+            }
+        },
+
+        filters: {
+
+            backwards(string) {
+                return string.split('').reverse().join('')
+            },
+
+        },
+
+        computed: {
+
+            boys() {
+                let boys = [];
+
+                this.names.forEach(name => {
+                    if (['Garry', 'John'].indexOf(name) !== -1) {
+                        boys.push(name);
+                    }
+                })
+
+                return boys;
+            }
+
+        }
+
+    })
+
+    new Vue({
+        el: '#my-app'
+    })
+
+</script>
+
+</body>
+</html>

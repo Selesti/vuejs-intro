@@ -12,11 +12,12 @@ These are basic accompanying documents to help explain various features of vuejs
   * Parsing vs no-parsing ✅
   * Parent/Child inheritance ✅
   * Shorthand vs Longhand ✅
-* Life-cycle
-* Mutable vs Immutable data
-* Methods
-* Computed properties
-* Filters
+* Life-cycle ✅
+* Immutable props vs mutable data ✅
+* Models and data ✅
+* Methods ✅
+* Computed properties ✅
+* Filters ✅
 * Extending classes aka Mixins
 * Reactivity
 * HTML Directives

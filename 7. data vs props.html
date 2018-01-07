@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data and models</title>
+    <script type="text/javascript" src="https://vuejs.org/js/vue.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+</head>
+<body>
+
+    <div id="my-app" class="container pt-4 d-flex flex-row">
+
+        <immutable inline-template :username="username">
+            <div class="card p-4 mr-4">
+                <h1 class="mb-2">Immutable prop</h1>
+                <button class="btn btn-danger" @click="changeName">Change name</button>
+                <code class="mt-2">{{ username }}</code>
+            </div>
+        </immutable>
+
+        <mutatable inline-template>
+            <div class="card p-4">
+                <h1 class="mb-2">mutatable data</h1>
+                <button class="btn btn-primary" @click="changeName">Change name</button>
+                <code class="mt-2">{{ username }}</code>
+            </div>
+        </mutatable>
+
+
+    </div>
+
+<script type="text/javascript">
+
+    Vue.component('immutable', {
+        props: ['username'],
+        methods: { changeName() { this.username = 'new username'; } }
+    })
+
+    Vue.component('mutatable', {
+        data() {
+            return {
+                username: 'old username'
+            }
+        },
+        methods: { changeName() { this.username = 'new username'; } }
+    })
+
+    new Vue({
+        el: '#my-app',
+        data: {
+            username: 'old username'
+        },
+        mounted() {
+            setInterval(() => this.$forceUpdate(), 1000)
+        }
+    })
+
+</script>
+
+</body>
+</html>

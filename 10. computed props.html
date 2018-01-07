@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Computed props</title>
+    <script type="text/javascript" src="https://vuejs.org/js/vue.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+</head>
+<body>
+
+    <div id="my-app" class="container pt-4 d-flex flex-row">
+
+        <computed inline-template>
+
+            <div class="alert alert-info">
+                Hello {{ this.fullName }}
+            </div>
+
+        </computed>
+
+    </div>
+
+<script type="text/javascript">
+
+    Vue.component('computed', {
+
+        data() {
+            return {
+                firstName: 'Garry',
+                lastName: 'Barlow'
+            }
+        },
+
+        computed: {
+
+            fullName() {
+                return `${this.firstName} ${this.lastName}`;
+            }
+
+        }
+
+    })
+
+    new Vue({
+        el: '#my-app'
+    })
+
+</script>
+
+</body>
+</html>

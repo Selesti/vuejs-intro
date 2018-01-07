@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data and models</title>
+    <script type="text/javascript" src="https://vuejs.org/js/vue.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+</head>
+<body>
+
+    <div id="my-app" class="container pt-4 d-flex flex-row">
+
+        <product inline-template>
+            <div class="card p-4 mr-4">
+
+                <div class="alert alert-warning">
+                    Model: {{ name }}<br>
+                    Year: {{ year }}<br>
+                    Price: ${{ price }}
+                </div>
+
+                <h1 class="mb-2"><strong>Editing: </strong> {{ name }}</h1>
+
+                <form>
+                    <input v-model="name">
+                    <input v-model="year">
+                    <input v-model="price">
+
+                    <button class="btn btn-primary" @click.prevent="rename">Rename car</button>
+                </form>
+            </div>
+        </product>
+
+    </div>
+
+<script type="text/javascript">
+
+    Vue.component('product', {
+        data() {
+            return {
+                name: 'Car X',
+                year: 2000,
+                price: 99.99
+            }
+        },
+        methods: {
+            rename() {
+                let newName = Math.floor((Math.random() * 100) + 1);
+                this.name = `Car ${newName}`;
+            }
+        }
+    })
+
+    new Vue({
+        el: '#my-app'
+    })
+
+</script>
+
+</body>
+</html>

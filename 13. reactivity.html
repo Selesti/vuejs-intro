@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reactivity</title>
+    <script type="text/javascript" src="https://vuejs.org/js/vue.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+</head>
+<body>
+
+    <div id="my-app" class="container pt-4  d-flex flex-row">
+
+        <reactivity inline-template>
+
+            <div class="card p-4 alert-info mr-4" style="min-width: 400px;">
+                <h2>People</h2>
+
+                <ul>
+                    <li v-for="person in people">
+
+                        <div @click="toggle(person)">
+                            {{ person.name }}
+                            <span v-if="!person.expanded" class="float-right">+</span>
+                            <span v-if="person.expanded" class="float-right">-</span>
+                        </div>
+
+                        <div v-if="person.expanded">
+                            Age: {{ person.age }}
+                        </div>
+
+                    </li>
+                </ul>
+
+            </div>
+
+
+        </reactivity>
+
+    </div>
+
+<script type="text/javascript">
+
+    Vue.component('reactivity', {
+
+        data() {
+            return {
+                people: [
+                    { name: 'Garry', age: 20, expanded: false},
+                    { name: 'Sophie', age: 24},
+                    { name: 'Chris', age: 12},
+                    { name: 'Mark', age: 32},
+                ]
+            }
+        },
+
+        methods: {
+
+            toggle(person) {
+                // will only work for garry
+                person.expanded = !person.expanded
+
+                // will work for everybody
+                // this.$set(person, 'expanded', !person.expanded)
+            }
+
+        }
+
+    })
+
+
+    new Vue({
+        el: '#my-app'
+    })
+
+</script>
+
+</body>
+</html>

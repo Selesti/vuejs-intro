@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mixins</title>
+    <script type="text/javascript" src="https://vuejs.org/js/vue.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+</head>
+<body>
+
+    <div id="my-app" class="container pt-4  d-flex flex-row">
+
+        <mage inline-template>
+
+            <div class="card p-4 alert-info mr-4" style="min-width: 400px;">
+                <h2>Mage</h2>
+
+                Life: {{ hp }}<br>
+                Defence: {{ defence }}<br>
+                Attack: {{ attk }}<br>
+                Special: {{ fireBall() }}
+            </div>
+
+
+        </mage>
+
+        <warrior inline-template>
+
+            <div class="card p-4 alert-danger" style="min-width: 400px;">
+                <h2>Warrior</h2>
+
+                Life: {{ hp }}<br>
+                Defence: {{ defence }}<br>
+                Attack: {{ attk }}<br>
+            </div>
+
+
+        </warrior>
+
+    </div>
+
+<script type="text/javascript">
+
+    const Player = {
+
+        computed: {
+
+            hp() {
+                return 100
+            },
+
+            attk() {
+                return 20
+            },
+
+            defence() {
+                return 20
+            }
+
+        }
+
+    }
+
+    Vue.component('mage', {
+
+        mixins: [Player],
+
+        methods: {
+
+            fireBall() {
+                return this.attk * 2
+            }
+
+        }
+
+    })
+
+    Vue.component('warrior', {
+
+        mixins: [Player],
+
+        computed: {
+
+            defence() {
+                return 50
+            }
+
+        }
+
+    })
+
+
+    new Vue({
+        el: '#my-app'
+    })
+
+</script>
+
+</body>
+</html>

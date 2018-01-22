@@ -21,3 +21,4 @@ These are basic accompanying documents to help explain various features of vuejs
 * Extending classes aka Mixins ✅
 * Reactivity ✅
 * HTML Directives ✅
+* Slots ✅

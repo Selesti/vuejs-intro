@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Components</title>
+    <script type="text/javascript" src="https://vuejs.org/js/vue.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <style type="text/css">body { color: #fff; }</style>
+</head>
+<body>
+
+    <div id="my-app" class="d-flex flex-row p-4">
+
+        <sl0ts>
+
+            <span>Active Page</span>
+
+            <ul slot="items">
+                <li><a href="">Category X</a></li>
+                <li><a href="">Category Y</a></li>
+                <li><a href="">Category Z</a></li>
+            </ul>
+
+        </sl0ts>
+
+    </div>
+
+<script type="text/javascript">
+
+    Vue.component('sl0ts', {
+        template: `<div class="p-2 dropdown" :class="{show : show}">
+
+            <button @click="toggle" class="btn btn-primary">
+                <slot>Unknown Item</slot>
+            </button>
+
+            <div class="dropdown-menu" v-if="show">
+                <slot name="items"></slot>
+            </div>
+
+        </div>`,
+
+        data() {
+            return {
+                show: false,
+            }
+        },
+
+        methods: {
+            toggle() {
+                this.show = !this.show;
+            }
+        }
+    })
+
+    new Vue({
+        el: '#my-app',
+    })
+
+</script>
+
+
+</body>
+</html>
